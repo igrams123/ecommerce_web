@@ -1,0 +1,29 @@
+<!-- Template for Search Results (shop/sneaker_search_results.html) -->
+{% extends 'shop/base.html' %}
+
+{% block title %}Search Results for "{{ query }}" - Trendy Sneakers{% endblock %}
+
+{% block content %}
+<h2>Search Results for "{{ query }}"</h2>
+<hr>
+
+<div class="sneaker-list">
+    {% for sneaker in sneakers %}
+        <div class="sneaker-item" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; margin: 10px; display: inline-block; width: 200px;">
+            <h3><a href="{% url 'sneaker_detail' sneaker.pk %}">{{ sneaker.name }}</a></h3>
+            <img src="{{ sneaker.image.url }}" alt="{{ sneaker.name }}" class="sneaker-image" style="max-width: 100%; height: auto;">
+            <p>Price: ${{ sneaker.price }}</p>
+            <form method="POST" action="{% url 'add_to_cart' sneaker.pk %}">
+                {% csrf_token %}
+                <button type="submit">Add to Cart</button>
+            </form>
+            <form method="POST" action="{% url 'save_sneaker' sneaker.pk %}" style="margin-top: 5px;">
+                {% csrf_token %}
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    {% empty %}
+        <p>No sneakers found matching your query.</p>
+    {% endfor %}
+</div>
+{% endblock %}

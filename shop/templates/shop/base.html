@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Trendy Sneakers{% endblock %}</title>
+    {% load static %}
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'shop/styles.css' %}">
+    <script src="{% static 'shop/scripts/main.js' %}"></script>
+</head>
+<body>
+    <header>
+        <h1>Trendy Sneakers</h1>
+        <nav>
+            <div style="float: left;">
+                <a href="{% url 'sneaker_list' %}"><i class="fa-solid fa-house"></i> Home</a>
+            </div>
+            <div style="float: left; margin-left: 20px;">
+             <!-- Search Form -->
+<form action="{% url 'sneaker_search' %}" method="GET" style="display: flex;">
+    <input type="text" name="q" placeholder="Search sneakers..." required class="search-input">
+    <button type="submit" class="search-button">Search</button>
+</form>
+            </div>
+            <div class="icon-container" style="float: right;">
+                <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+                <a href="{% url 'saved_sneakers' %}"><i class="fa-regular fa-bookmark"></i> Saved</a>
+            </div>
+            <div style="clear: both;"></div>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    <footer>
+        <p>Made with ❤️ by Billy Obunde</p>
+    </footer>
+
+    <script>
+        function increaseQuantity(id) {
+            const quantityInput = document.getElementById(`quantity-${id}`);
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+        }
+
+        function decreaseQuantity(id) {
+            const quantityInput = document.getElementById(`quantity-${id}`);
+            if (quantityInput.value > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+        }
+
+        function addToCart(id) {
+            const quantity = document.getElementById(`quantity-${id}`).value;
+            console.log(`Add sneaker ID: ${id} to cart with quantity: ${quantity}`);
+            // Here you might want to send an AJAX request to add the item to the cart.
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+/* Base Styles */
+body { 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007bff; /* Main color */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Align items */
+    align-items: center; /* Center vertically */
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    display: flex; /* Use flexbox for navigation */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center; /* Center vertically */
+    width: 100%; /* Make nav full width */
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    display: flex; /* Align icon and text */
+    align-items: center; /* Center icon vertically */
+    margin-right: 15px; /* Space between links */
+}
+
+nav .icon-container {
+    display: flex;
+    align-items: center; /* Center icons vertically */
+    gap: 15px; /* Space between icons */
+}
+
+/* Search Form Styles */
+form {
+    display: flex;
+    align-items: center; /* Center vertically */
+}
+
+.search-input {
+    padding: 8px 12px; /* Increased padding for better touch targets */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    margin-right: 5px; /* Space between input and button */
+    width: 200px; /* Fixed width */
+    transition: border-color 0.3s; /* Smooth transition for focus */
+}
+
+.search-input:focus {
+    border-color: #28a745; /* Change border color to green on focus */
+    outline: none; /* Remove default outline */
+}
+
+.search-button {
+    background-color: #007bff; /* Main button color */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners for the button */
+    padding: 8px 12px; /* Padding for the button */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.search-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Sneaker List Styles */
+.sneaker-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    justify-content: space-between; /* Space items evenly */
+}
+
+.sneaker-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: calc(33% - 20px); /* Adjusted for spacing */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s; /* Add hover effect */
+}
+
+.sneaker-item:hover {
+    transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+.sneaker-item h3 {
+    font-size: 1.2em;
+    margin: 0 0 10px; /* Added margin for spacing */
+}
+
+.sneaker-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0; /* Remove default margin */
+}
+
+/* Styles for horizontal lines between sections */
+hr {
+    margin: 20px 0; /* Space around horizontal line */
+    border: 0;
+    height: 1px;
+    background: #ddd; /* Color of the line */
+}
+
+/* Checkout Styles */
+.checkout-title {
+    text-align: center;
+    margin: 20px 0; /* Margin for spacing */
+}
+
+.checkout-form {
+    max-width: 600px; /* Limit form width */
+    margin: 0 auto; /* Center form */
+    padding: 20px; /* Padding for form */
+    border: 1px solid #ddd; /* Border for form */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for form */
+}
+
+.order-title, .delivery-details-title, .payment-method-title {
+    margin: 20px 0 10px; /* Margin for spacing */
+    font-size: 1.5em; /* Larger font for section titles */
+}
+
+.order-list {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+}
+
+.order-item, .empty-cart-message {
+    padding: 10px;
+    border: 1px solid #ddd; /* Border for order items */
+    margin: 10px 0; /* Space between items */
+}
+
+.checkout-input, .checkout-textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%; /* Full width for inputs */
+    margin-bottom: 10px; /* Space below each input */
+}
+
+.checkout-textarea {
+    height: 100px; /* Fixed height for better usability */
+}
+
+/* Button Styling */
+button {
+    background-color: #007bff; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners for button */
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 5px; /* Add some spacing */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Alert Styles for Messages */
+.alert {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb; /* Border color */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #cce5ff; /* Light blue background */
+    color: #004085; /* Dark blue text */
+    border-color: #b8daff; /* Border color */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .sneaker-item {
+        width: calc(50% - 20px); /* 2 items per row on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .sneaker-item {
+        width: calc(100% - 20px); /* 1 item per row on small screens */
+    }
+}

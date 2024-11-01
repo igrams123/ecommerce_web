@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out</title>
+    <link rel="stylesheet" href="{% static 'shop/styles.css' %}"> <!-- Link to your main CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4; /* Light background for better contrast */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+            margin: 0;
+            text-align: center; /* Center text */
+        }
+        h1 {
+            color: #007bff; /* Main color for headings */
+        }
+        p {
+            margin-top: 10px; /* Space above paragraphs */
+        }
+        a {
+            color: #007bff; /* Main color for links */
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s; /* Smooth transition for hover effect */
+        }
+        a:hover {
+            color: #0056b3; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Logged Out</h1>
+        <p>You have successfully logged out. Thank you for visiting!</p>
+        <p><a href="{% url 'login' %}">Login again</a></p> <!-- Link to login page -->
+        <p><a href="{% url 'sneaker_list' %}">Return to Home</a></p> <!-- Link to return home -->
+    </div>
+</body>
+</html>

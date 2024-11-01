@@ -1,0 +1,37 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Your Cart - Trendy Sneakers{% endblock %}
+
+{% block content %}
+<h1>Your Cart</h1>
+<ul>
+    {% for cart_item in cart_items %}
+        <li>
+            <a href="{% url 'sneaker_detail' cart_item.sneaker.pk %}">{{ cart_item.sneaker.name }}</a> - 
+            Quantity: {{ cart_item.quantity }}
+            <form method="POST" action="{% url 'update_cart_quantity' cart_item.pk 'increase' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">+</button>
+            </form>
+            <form method="POST" action="{% url 'update_cart_quantity' cart_item.pk 'decrease' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" {% if cart_item.quantity <= 1 %}disabled{% endif %}>-</button>
+            </form>
+            <form method="POST" action="{% url 'remove_from_cart' cart_item.pk %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Remove</button>
+            </form>
+        </li>
+    {% empty %}
+        <li>Your cart is empty.</li>
+    {% endfor %}
+</ul>
+
+{% if cart_items %}
+    <h3>Total: ${{ total_price }}</h3>
+    <form method="POST" action="{% url 'checkout' %}">
+        {% csrf_token %}
+        <button type="submit">Checkout</button>
+    </form>
+{% endif %}
+{% endblock %}

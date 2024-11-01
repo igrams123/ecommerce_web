@@ -1,0 +1,27 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Order Confirmation{% endblock %}
+
+{% block content %}
+<h1>Thank you for your order!</h1>
+<p>Your order has been successfully placed.</p>
+
+<h2>Order Summary</h2>
+<p><strong>Order ID:</strong> {{ order.id }}</p>
+<p><strong>Total Amount:</strong> KES {{ order.total_price }}</p>
+<p><strong>Shipping Details:</strong></p>
+<p>Name: {{ order.name }}</p>
+<p>Address: {{ order.address }}</p>
+<p>Phone: {{ order.phone }}</p>
+
+<h3>Items Ordered:</h3>
+<ul>
+    {% for item in order.orderitem_set.all %}
+        <li>{{ item.sneaker.name }} - KES {{ item.sneaker.price }} (Quantity: {{ item.quantity }})</li>
+    {% empty %}
+        <li>No items ordered.</li>
+    {% endfor %}
+</ul>
+
+<p>Thank you for shopping with trendy sneakers!</p>
+{% endblock %}

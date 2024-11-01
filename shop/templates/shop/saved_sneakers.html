@@ -1,0 +1,20 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Saved Items{% endblock %}
+
+{% block content %}
+<h2>Saved Items</h2>
+<div class="sneaker-list">  <!-- Updated class name -->
+    {% for saved in saved_sneakers %}  <!-- Ensure this matches your view context -->
+        <div class="sneaker-item">  <!-- Updated class name -->
+            <h3>{{ saved.sneaker.name }}</h3>  <!-- Ensure this matches your model -->
+            <img src="{{ saved.sneaker.image.url }}" alt="{{ saved.sneaker.name }}" class="sneaker-image" style="max-width: 200px;"> <!-- Adjust size as needed -->
+            <p>Price: ${{ saved.sneaker.price }}</p>
+            <a href="{% url 'add_to_cart' saved.sneaker.pk %}">Add to Cart</a>
+            <a href="{% url 'sneaker_detail' saved.sneaker.pk %}">View Details</a>  <!-- Ensure this matches your URL name -->
+        </div>
+    {% empty %}
+        <p>No saved items.</p>
+    {% endfor %}
+</div>
+{% endblock %}

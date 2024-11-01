@@ -1,0 +1,123 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}  <!-- Ensure this line is present to load static files -->
+
+{% block title %}Checkout - Trendy Sneakers{% endblock %}
+
+{% block content %}
+<h1 class="checkout-title">Checkout</h1>
+<form method="POST" id="checkout-form" class="checkout-form">
+    {% csrf_token %}
+    <h2 class="order-title">Your Order</h2>
+    <ul class="order-list">
+        {% for item in cart_items %}
+            <li class="order-item">{{ item.sneaker.name }} - Quantity: {{ item.quantity }}</li>
+        {% empty %}
+            <li class="empty-cart-message">Your cart is empty.</li>
+        {% endfor %}
+    </ul>
+
+    <h2 class="delivery-details-title">Delivery Details</h2>
+    <label for="name" class="checkout-label">Name:</label>
+    <input type="text" id="name" name="name" class="checkout-input" required><br>
+    
+    <label for="address" class="checkout-label">Address:</label>
+    <textarea id="address" name="address" class="checkout-textarea" required></textarea><br>
+    
+    <label for="phone" class="checkout-label">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" class="checkout-input" required pattern="(2547[0-9]{8}|07[0-9]{8}|011[0-9]{7})" placeholder="e.g., 254708374149 or 0712345678"><br>
+
+    <h2 class="payment-method-title">Payment Method</h2>
+    <p class="payment-info">Please pay using M-Pesa.</p>
+
+    <!-- Dynamically set the amount from the backend -->
+    <input type="hidden" id="amount" name="amount" value="{{ total_price|default_if_none:0 }}"> 
+
+    <button type="submit" id="pay-button" class="pay-button">Complete Order</button>
+
+    <div id="error-message" class="error-message" style="display:none;"></div> <!-- Initially hidden -->
+</form>
+
+<script src="{% static 'shop/main.js' %}"></script> <!-- Link to main.js -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('checkout-form');
+        
+        form.onsubmit = function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const orderAmount = parseFloat(document.getElementById('amount').value);
+            const phoneNumber = document.getElementById('phone').value;
+            const customerName = document.getElementById('name').value;
+            const customerAddress = document.getElementById('address').value;
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value; // Get CSRF token
+
+            // Updated regex to allow phone numbers starting with 011, 07, and international format
+            const phoneRegex = /^(2547[0-9]{8}|07[0-9]{8}|011[0-9]{7})$/;
+
+            if (!orderAmount || isNaN(orderAmount) || !phoneNumber || !customerName || !customerAddress) {
+                displayError("Please fill all the required fields."); // Use displayError function
+                return;
+            }
+
+            if (!phoneRegex.test(phoneNumber)) {
+                displayError("Please enter a valid phone number (e.g., 254712345678 or 0712345678 or 0114443998).");
+                return;
+            }
+
+            // Disable button and show loading state
+            form.querySelector('#pay-button').disabled = true; 
+            form.querySelector('#pay-button').innerText = 'Processing...'; 
+
+            // Send payment request
+            fetch('/initiate_payment/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrfToken // Use the dynamically fetched CSRF token
+                },
+                body: new URLSearchParams({
+                    'amount': orderAmount,
+                    'phone': phoneNumber,
+                    'name': customerName,
+                    'address': customerAddress
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errData => {
+                        throw new Error(errData.error || "Payment initiation failed. Please try again.");
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    displayError("Payment initiation failed: " + data.error);
+                } else {
+                    alert("Payment initiated successfully. Please complete the transaction on your phone.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                displayError("An error occurred: " + error.message);
+            })
+            .finally(() => {
+                resetButton(form.querySelector('#pay-button')); // Use resetButton function
+            });
+        };
+
+        function displayError(message) {
+            const errorMessageDiv = document.getElementById('error-message');
+            errorMessageDiv.innerText = message;
+            errorMessageDiv.style.display = 'block'; // Show the error message
+        }
+
+        function resetButton(button) {
+            button.disabled = false; // Re-enable button
+            button.innerText = 'Complete Order'; // Reset button text
+        }
+    });
+</script>
+{% endblock %}

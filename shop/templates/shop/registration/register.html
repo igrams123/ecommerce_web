@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'shop/styles.css' %}"> <!-- Link to your main CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4; /* Light background for better contrast */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+            margin: 0;
+        }
+        h1 {
+            color: #007bff; /* Main color for headings */
+        }
+        form {
+            background: white; /* White background for the form */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            width: 300px; /* Fixed width */
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%; /* Full width inputs */
+            padding: 10px;
+            margin: 10px 0; /* Spacing between inputs */
+            border: 1px solid #ccc; /* Border color */
+            border-radius: 5px; /* Rounded corners */
+            transition: border-color 0.3s; /* Smooth transition */
+        }
+        input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+            border-color: #007bff; /* Change border color on focus */
+        }
+        button {
+            background-color: #007bff; /* Button color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+        p {
+            margin-top: 15px; /* Space above paragraphs */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Register</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Render the form fields -->
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p> <!-- Link to login page -->
+    </div>
+</body>
+</html>

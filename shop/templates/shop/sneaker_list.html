@@ -1,0 +1,184 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Home - Trendy Sneakers{% endblock %}
+
+{% block content %}
+<h2>Featured Sneakers</h2>
+<hr>
+
+<!-- Trending Sneakers Section -->
+<section id="trending-sneakers">
+    <h2>Trending Sneakers</h2>
+    <div class="sneaker-list">
+        {% for sneaker in sneaker_sections.Trending %}
+            <div class="sneaker-item" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; margin: 10px; display: inline-block; width: 200px;">
+                <h3><a href="{% url 'sneaker_detail' sneaker.pk %}">{{ sneaker.name }}</a></h3>
+                <img src="{{ sneaker.image.url }}" alt="{{ sneaker.name }}" class="sneaker-image" style="max-width: 100%; height: auto;">
+                <p>Price: ${{ sneaker.price }}</p>
+                <form method="POST" action="{% url 'add_to_cart' sneaker.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form>
+                <form method="POST" action="{% url 'save_sneaker' sneaker.pk %}" style="margin-top: 5px;">
+                    {% csrf_token %}
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        {% empty %}
+            <p>No trending sneakers available.</p>
+        {% endfor %}
+    </div>
+</section>
+<hr>
+
+<!-- New Arrivals Section -->
+<section id="new-arrivals">
+    <h2>New Arrivals</h2>
+    <div class="sneaker-list">
+        {% for sneaker in sneaker_sections.New_Arrivals %}
+            <div class="sneaker-item" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; margin: 10px; display: inline-block; width: 200px;">
+                <h3><a href="{% url 'sneaker_detail' sneaker.pk %}">{{ sneaker.name }}</a></h3>
+                <img src="{{ sneaker.image.url }}" alt="{{ sneaker.name }}" class="sneaker-image" style="max-width: 100%; height: auto;">
+                <p>Price: ${{ sneaker.price }}</p>
+                <form method="POST" action="{% url 'add_to_cart' sneaker.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form>
+                <form method="POST" action="{% url 'save_sneaker' sneaker.pk %}" style="margin-top: 5px;">
+                    {% csrf_token %}
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        {% empty %}
+            <p>No new arrivals available.</p>
+        {% endfor %}
+    </div>
+</section>
+<hr>
+
+<!-- Discounted Sneakers Section -->
+<section id="discounted-sneakers">
+    <h2>On Sale</h2>
+    <div class="sneaker-list">
+        {% for sneaker in sneaker_sections.Discounted %}
+            <div class="sneaker-item" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; margin: 10px; display: inline-block; width: 200px;">
+                <h3><a href="{% url 'sneaker_detail' sneaker.pk %}">{{ sneaker.name }}</a></h3>
+                <img src="{{ sneaker.image.url }}" alt="{{ sneaker.name }}" class="sneaker-image" style="max-width: 100%; height: auto;">
+                <p>Price: ${{ sneaker.price }}</p>
+                <form method="POST" action="{% url 'add_to_cart' sneaker.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form>
+                <form method="POST" action="{% url 'save_sneaker' sneaker.pk %}" style="margin-top: 5px;">
+                    {% csrf_token %}
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        {% empty %}
+            <p>No discounted sneakers available.</p>
+        {% endfor %}
+    </div>
+</section>
+<hr>
+
+<!-- Running Sneakers Section -->
+<section id="running-sneakers">
+    <h2>Running Sneakers</h2>
+    <div class="sneaker-list">
+        {% for sneaker in sneaker_sections.Running %}
+            <div class="sneaker-item" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; margin: 10px; display: inline-block; width: 200px;">
+                <h3><a href="{% url 'sneaker_detail' sneaker.pk %}">{{ sneaker.name }}</a></h3>
+                <img src="{{ sneaker.image.url }}" alt="{{ sneaker.name }}" class="sneaker-image" style="max-width: 100%; height: auto;">
+                <p>Price: ${{ sneaker.price }}</p>
+                <form method="POST" action="{% url 'add_to_cart' sneaker.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form>
+                <form method="POST" action="{% url 'save_sneaker' sneaker.pk %}" style="margin-top: 5px;">
+                    {% csrf_token %}
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        {% empty %}
+            <p>No running sneakers available.</p>
+        {% endfor %}
+    </div>
+</section>
+<hr>
+
+<!-- Basketball Sneakers Section -->
+<section id="basketball-sneakers">
+    <h2>Basketball Sneakers</h2>
+    <div class="sneaker-list">
+        {% for sneaker in sneaker_sections.Basketball %}
+            <div class="sneaker-item" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; margin: 10px; display: inline-block; width: 200px;">
+                <h3><a href="{% url 'sneaker_detail' sneaker.pk %}">{{ sneaker.name }}</a></h3>
+                <img src="{{ sneaker.image.url }}" alt="{{ sneaker.name }}" class="sneaker-image" style="max-width: 100%; height: auto;">
+                <p>Price: ${{ sneaker.price }}</p>
+                <form method="POST" action="{% url 'add_to_cart' sneaker.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form>
+                <form method="POST" action="{% url 'save_sneaker' sneaker.pk %}" style="margin-top: 5px;">
+                    {% csrf_token %}
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        {% empty %}
+            <p>No basketball sneakers available.</p>
+        {% endfor %}
+    </div>
+</section>
+<hr>
+
+<!-- Outdoor Sneakers Section -->
+<section id="outdoor-sneakers">
+    <h2>Outdoor Sneakers</h2>
+    <div class="sneaker-list">
+        {% for sneaker in sneaker_sections.Outdoor %}
+            <div class="sneaker-item" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; margin: 10px; display: inline-block; width: 200px;">
+                <h3><a href="{% url 'sneaker_detail' sneaker.pk %}">{{ sneaker.name }}</a></h3>
+                <img src="{{ sneaker.image.url }}" alt="{{ sneaker.name }}" class="sneaker-image" style="max-width: 100%; height: auto;">
+                <p>Price: ${{ sneaker.price }}</p>
+                <form method="POST" action="{% url 'add_to_cart' sneaker.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form>
+                <form method="POST" action="{% url 'save_sneaker' sneaker.pk %}" style="margin-top: 5px;">
+                    {% csrf_token %}
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        {% empty %}
+            <p>No outdoor sneakers available.</p>
+        {% endfor %}
+    </div>
+</section>
+<hr>
+
+<!-- Lifestyle Sneakers Section -->
+<section id="lifestyle-sneakers">
+    <h2>Lifestyle Sneakers</h2>
+    <div class="sneaker-list">
+        {% for sneaker in sneaker_sections.Lifestyle %}
+            <div class="sneaker-item" style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; margin: 10px; display: inline-block; width: 200px;">
+                <h3><a href="{% url 'sneaker_detail' sneaker.pk %}">{{ sneaker.name }}</a></h3>
+                <img src="{{ sneaker.image.url }}" alt="{{ sneaker.name }}" class="sneaker-image" style="max-width: 100%; height: auto;">
+                <p>Price: ${{ sneaker.price }}</p>
+                <form method="POST" action="{% url 'add_to_cart' sneaker.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">Add to Cart</button>
+                </form>
+                <form method="POST" action="{% url 'save_sneaker' sneaker.pk %}" style="margin-top: 5px;">
+                    {% csrf_token %}
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        {% empty %}
+            <p>No lifestyle sneakers available.</p>
+        {% endfor %}
+    </div>
+</section>
+<hr>
+
+{% endblock %}

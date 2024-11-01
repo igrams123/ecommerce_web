@@ -1,0 +1,94 @@
+body { 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007bff; /* Main color */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Align items */
+    align-items: center; /* Center vertically */
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    display: flex; /* Use flexbox for navigation */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center; /* Center vertically */
+    width: 100%; /* Make nav full width */
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    display: flex; /* Align icon and text */
+    align-items: center; /* Center icon vertically */
+    margin-right: 15px; /* Space between links */
+}
+
+nav .icon-container {
+    display: flex;
+    align-items: center; /* Center icons vertically */
+    gap: 15px; /* Space between icons */
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    justify-content: space-between; /* Space items evenly */
+}
+
+.product-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: calc(33% - 20px); /* Adjusted for spacing */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s; /* Add hover effect */
+}
+
+.product-item:hover {
+    transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+.product-item h3 {
+    font-size: 1.2em;
+    margin: 0 0 10px; /* Added margin for spacing */
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0; /* Remove default margin */
+}
+
+/* Added styles for the love icon */
+.love-icon {
+    display: inline-block;
+    margin-right: 5px; /* Space between icon and text */
+}
+
+nav ul li a i {
+    color: black; /* Set icon color to black */
+}
